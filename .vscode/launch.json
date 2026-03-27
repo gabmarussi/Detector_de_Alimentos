@@ -1,0 +1,55 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🎬 Detector - RUN.PY",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/Camera/run.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "cwd": "${workspaceFolder}/Camera",
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            }
+        },
+        {
+            "name": "📱 Webcam MacBook",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/Camera/detector.py",
+            "args": [
+                "--model",
+                "../runs/food-v6-local/weights/best.pt",
+                "--source",
+                "webcam",
+                "--camera-id",
+                "0"
+            ],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/Camera",
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            }
+        },
+        {
+            "name": "🍎 Continuity Camera (iPhone)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/Camera/detector.py",
+            "args": [
+                "--model",
+                "../runs/food-v6-local/weights/best.pt",
+                "--source",
+                "webcam",
+                "--camera-id",
+                "1"
+            ],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/Camera",
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            }
+        }
+    ]
+}
