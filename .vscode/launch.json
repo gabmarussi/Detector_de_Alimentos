@@ -5,10 +5,10 @@
             "name": "🎬 Detector - RUN.PY",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/Camera/run.py",
+            "program": "${workspaceFolder}/detector/run.py",
             "console": "integratedTerminal",
             "justMyCode": false,
-            "cwd": "${workspaceFolder}/Camera",
+            "cwd": "${workspaceFolder}/detector",
             "env": {
                 "PYTHONUNBUFFERED": "1"
             }
@@ -17,7 +17,7 @@
             "name": "📱 Webcam MacBook",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/Camera/detector.py",
+            "program": "${workspaceFolder}/detector/detector.py",
             "args": [
                 "--model",
                 "../runs/food-v6-local/weights/best.pt",
@@ -27,7 +27,7 @@
                 "0"
             ],
             "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}/Camera",
+            "cwd": "${workspaceFolder}/detector",
             "env": {
                 "PYTHONUNBUFFERED": "1"
             }
@@ -36,7 +36,7 @@
             "name": "🍎 Continuity Camera (iPhone)",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/Camera/detector.py",
+            "program": "${workspaceFolder}/detector/detector.py",
             "args": [
                 "--model",
                 "../runs/food-v6-local/weights/best.pt",
@@ -46,7 +46,7 @@
                 "1"
             ],
             "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}/Camera",
+            "cwd": "${workspaceFolder}/detector",
             "env": {
                 "PYTHONUNBUFFERED": "1"
             }
