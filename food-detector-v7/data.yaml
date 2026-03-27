@@ -1,0 +1,13 @@
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 3
+names: ["beans package", "pasta package", "rice package"]
+
+roboflow:
+  workspace: gabriel-marussi-s-workspace
+  project: food-detector-9zgsn
+  version: 7
+  license: Public Domain
+  url: https://universe.roboflow.com/gabriel-marussi-s-workspace/food-detector-9zgsn/dataset/7
