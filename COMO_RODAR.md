@@ -18,6 +18,7 @@ code .
 ### Passo 3: Escolha a opção
 
 Uma caixa de diálogo aparecerá no terminal:
+
 ```
 Escolha uma opção:
 
@@ -67,15 +68,18 @@ python detector.py --model ../runs/food-v6-local/weights/best.pt --source webcam
 ## 🎯 Principais Mudanças
 
 ### ✅ Threshold Aumentado (0.4 → 0.6)
+
 - **Antes:** Detectava tudo como arroz com confiança baixa
 - **Depois:** Mais seletivo, apenas objetos com >60% confiança
 
 ### ✅ Câmera iPhone Melhorada
+
 - Reduz delay com `BUFFERSIZE=1`
 - Define FPS fixo em 30
 - Mostra avisos se perder frame
 
 ### ✅ Script `run.py` Simples
+
 - Menu interativo
 - Sem argumentos de linha de comando
 - Apertável com play button do VS Code
@@ -85,11 +89,13 @@ python detector.py --model ../runs/food-v6-local/weights/best.pt --source webcam
 ## 🐛 Se Ainda Houver Problemas
 
 ### Problema: "Tudo ainda é arroz"
+
 - ✅ Verificamos o threshold, agora está 0.6
 - Se persistir, é possível que o modelo tenha super-ajuste
 - Solução: Fazer novo treinamento com data augmentation balanceada
 
 ### Problema: "iPhone para rapidamente"
+
 - ✅ Corrigimos com `BUFFERSIZE=1` e `FPS=30`
 - Se ainda assim parar, verifique:
   1. iPhone está conectado como Continuity Camera?
@@ -97,6 +103,7 @@ python detector.py --model ../runs/food-v6-local/weights/best.pt --source webcam
   3. Tente usar camera-id 2 ou 3
 
 ### Problema: "Não consigo saber como rodar"
+
 - ✅ Agora é só apertar play button em `run.py`
 - VS Code mostra menu interativo no terminal
 
@@ -106,3 +113,54 @@ python detector.py --model ../runs/food-v6-local/weights/best.pt --source webcam
 
 Abra o VS Code, vá em `Camera/run.py` e aperte o play button! 🎮
 
+---
+
+## 🧠 Treino v7 (YOLO11)
+
+### Objetivo
+
+Treinar a versão **v7** do detector usando o dataset em `food-detector-v7` e salvar os pesos em `runs/food-v7-local`.
+
+### Pré-requisitos
+
+```bash
+cd /Users/gabmarussi/Documents/GitHub/Detector-de-Alimentos
+source .venv/bin/activate
+pip install -r detector/requirements.txt
+```
+
+### Comando de treino (v7)
+
+Execute a partir da raiz do projeto:
+
+```bash
+cd /Users/gabmarussi/Documents/GitHub/Detector-de-Alimentos
+
+yolo detect train \
+  model=detector/yolo11n.pt \
+  data=food-detector-v7/data.yaml \
+  epochs=100 \
+  batch=16 \
+  imgsz=384 \
+  patience=100 \
+  project=runs \
+  name=food-v7-local
+```
+
+### Saídas esperadas
+
+- Pesos: `runs/food-v7-local/weights/best.pt` e `runs/food-v7-local/weights/last.pt`
+- Métricas por época: `runs/food-v7-local/results.csv`
+- Configuração final do treino: `runs/food-v7-local/args.yaml`
+
+### Validar rapidamente o modelo treinado
+
+```bash
+cd detector
+python detector.py --model ../runs/food-v7-local/weights/best.pt --source webcam --camera-id 0
+```
+
+### Observações
+
+- O `args.yaml` do treino v7 registrado no projeto mostra: `epochs=100`, `batch=16`, `imgsz=384` e `name=food-v7-local`.
+- Se quiser sobrescrever uma execução anterior com o mesmo nome, adicione `exist_ok=True` no comando.
