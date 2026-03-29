@@ -1,74 +1,42 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "🎬 Detector - RUN.PY",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/detector/run.py",
-            "console": "integratedTerminal",
-            "justMyCode": false,
-            "cwd": "${workspaceFolder}/detector",
-            "env": {
-                "PYTHONUNBUFFERED": "1"
-            }
-        },
-        {
-            "name": "📱 Webcam MacBook",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/detector/detector.py",
-            "args": [
-                "--model",
-                "../runs/food-v6-local/weights/best.pt",
-                "--source",
-                "webcam",
-                "--camera-id",
-                "0"
-            ],
-            "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}/detector",
-            "env": {
-                "PYTHONUNBUFFERED": "1"
-            }
-        },
-        {
-            "name": "🍎 Continuity Camera (iPhone)",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/detector/detector.py",
-            "args": [
-                "--model",
-                "../runs/food-v6-local/weights/best.pt",
-                "--source",
-                "webcam",
-                "--camera-id",
-                "1"
-            ],
-            "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}/detector",
-            "env": {
-                "PYTHONUNBUFFERED": "1"
-            }
-        },
-        {
-            "name": "🧪 Teste V8 (RUN.PY)",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/detector/run.py",
-            "args": [
-                "--version",
-                "v8",
-                "--camera-id",
-                "0",
-                "--mode",
-                "conveyor"
-            ],
-            "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}/detector",
-            "env": {
-                "PYTHONUNBUFFERED": "1"
-            }
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "🎬 Detector - Modo Conveyor",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/detector/run.py",
+      "args": ["--camera-id", "0", "--mode", "conveyor"],
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}/detector",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "📱 Webcam MacBook",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/detector/run.py",
+      "args": ["--camera-id", "0", "--mode", "live"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/detector",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "🍎 Continuity Camera (iPhone)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/detector/run.py",
+      "args": ["--camera-id", "1", "--mode", "conveyor"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/detector",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  ]
 }

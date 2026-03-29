@@ -5,8 +5,7 @@ from detector import FoodDetector
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Executa detector com modelo v6, v7 ou v8")
-    parser.add_argument("--version", choices=["v6", "v7", "v8"], default="v8")
+    parser = argparse.ArgumentParser(description="Executa detector com YOLOv11")
     parser.add_argument("--camera-id", type=int, default=0)
     parser.add_argument("--conf", type=float, default=0.7)
     parser.add_argument("--mode", choices=["conveyor", "live"], default="conveyor")
@@ -15,42 +14,26 @@ def parse_args():
     return parser.parse_args()
 
 
-def resolve_model_path(version: str) -> Path:
+def resolve_model_path() -> Path:
     root = Path(__file__).resolve().parent.parent
-    candidates = {
-        "v6": [
-            root / "runs" / "food-v6-local" / "weights" / "best.pt",
-            root / "versions" / "v6" / "best.pt",
-            root / "detectors" / "runs" / "food-v6-local" / "weights" / "best.pt",
-            root / "detectors" / "versions" / "v6" / "best.pt",
-        ],
-        "v7": [
-            root / "runs" / "food-v7-local" / "weights" / "best.pt",
-            root / "versions" / "v7" / "best.pt",
-            root / "detectors" / "runs" / "food-v7-local" / "weights" / "best.pt",
-            root / "detectors" / "versions" / "v7" / "best.pt",
-        ],
-        "v8": [
-            root / "runs" / "food-v8-local" / "weights" / "best.pt",
-            root / "versions" / "v8" / "best.pt",
-            root / "detectors" / "runs" / "food-v8-local" / "weights" / "best.pt",
-            root / "detectors" / "versions" / "v8" / "best.pt",
-        ],
-    }
+    candidates = [
+        root / "detectors" / "versions" / "v8" / "best.pt",
+        root / "detectors" / "runs" / "food-v8-local" / "weights" / "best.pt",
+    ]
 
-    for path in candidates[version]:
+    for path in candidates:
         if path.exists():
             return path
 
-    searched = "\n".join(str(p) for p in candidates[version])
+    searched = "\n".join(str(p) for p in candidates)
     raise FileNotFoundError(
-        f"Modelo {version} nao encontrado. Caminhos verificados:\n{searched}"
+        f"Modelo YOLOv11 nao encontrado. Caminhos verificados:\n{searched}"
     )
 
 
 def main():
     args = parse_args()
-    model_path = resolve_model_path(args.version)
+    model_path = resolve_model_path()
 
     detector = FoodDetector(str(model_path), conf=args.conf)
     detector.predict_webcam(
