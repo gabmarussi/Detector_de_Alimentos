@@ -61,6 +61,9 @@ python run.py
 
 # Ou rodar direto (sem menu)
 python detector.py --model ../runs/food-v6-local/weights/best.pt --source webcam --camera-id 0
+
+# Teste direto da versao v8 (busca automatica de pesos)
+python run.py --version v8 --camera-id 0 --mode conveyor
 ```
 
 ---

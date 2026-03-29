@@ -5,8 +5,8 @@ from detector import FoodDetector
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Executa detector com modelo v6 ou v7")
-    parser.add_argument("--version", choices=["v6", "v7"], default="v7")
+    parser = argparse.ArgumentParser(description="Executa detector com modelo v6, v7 ou v8")
+    parser.add_argument("--version", choices=["v6", "v7", "v8"], default="v8")
     parser.add_argument("--camera-id", type=int, default=0)
     parser.add_argument("--conf", type=float, default=0.7)
     parser.add_argument("--mode", choices=["conveyor", "live"], default="conveyor")
@@ -29,6 +29,12 @@ def resolve_model_path(version: str) -> Path:
             root / "versions" / "v7" / "best.pt",
             root / "detectors" / "runs" / "food-v7-local" / "weights" / "best.pt",
             root / "detectors" / "versions" / "v7" / "best.pt",
+        ],
+        "v8": [
+            root / "runs" / "food-v8-local" / "weights" / "best.pt",
+            root / "versions" / "v8" / "best.pt",
+            root / "detectors" / "runs" / "food-v8-local" / "weights" / "best.pt",
+            root / "detectors" / "versions" / "v8" / "best.pt",
         ],
     }
 

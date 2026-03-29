@@ -50,6 +50,25 @@
             "env": {
                 "PYTHONUNBUFFERED": "1"
             }
+        },
+        {
+            "name": "🧪 Teste V8 (RUN.PY)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/detector/run.py",
+            "args": [
+                "--version",
+                "v8",
+                "--camera-id",
+                "0",
+                "--mode",
+                "conveyor"
+            ],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/detector",
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            }
         }
     ]
 }
