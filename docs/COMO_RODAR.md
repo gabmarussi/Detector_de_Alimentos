@@ -1,187 +1,83 @@
-# 🎬 Como Rodar o Detector
+# Como Rodar o Detector
 
-Existem 3 formas de rodar o detector. Escolha a mais conveniente!
+Estrutura do projeto:
 
----
+- camera/ para inferencia em tempo real
+- detector/ para dataset e modelo treinado
 
-## ⭐ Opção 1: Play Button (Mais Fácil)
+## Opcao 1: VS Code (Play/Debug)
 
-Essa é a forma **mais rápida** e **sem complicações**.
+1. Abra um arquivo em camera/.
+2. Abra Run and Debug.
+3. Escolha uma configuracao:
+   - Detector - RUN.PY
+   - Webcam MacBook
+   - Continuity Camera (iPhone)
+   - Teste Modelo Atual (RUN.PY)
+4. Rode e pare com q.
 
-### Passo a Passo:
+Observacao: as configuracoes apontam para ../detector/runs/train/weights/best.pt.
 
-1. Abra o VS Code:
+## Opcao 2: Terminal (Windows PowerShell)
 
-   ```bash
-   cd /Users/gabmarussi/Documents/GitHub/Detector-de-Alimentos
-   code .
-   ```
+Na raiz do projeto:
 
-2. Na barra lateral esquerda, clique em `detector/run.py`
-
-3. Você verá um **triângulo verde ▶️** no canto superior direito
-
-4. Clique nele e **pronto!** A câmera vai iniciar
-
-5. Para parar, pressione `q` no teclado
-
----
-
-## 💻 Opção 2: Debug Configurations (VS Code)
-
-Usa configurações pré-definidas do VS Code para diferentes câmeras.
-
-### Passo a Passo:
-
-1. Abra qualquer arquivo em `detector/`
-2. Pressione **`Ctrl+Shift+D`** (ou **`Cmd+Shift+D`** no Mac)
-3. Você verá um dropdown com opções:
-   - 🎬 **Detector - Modo Conveyor** (webcam interna, conta alimentos)
-   - 📱 **Webcam MacBook** (webcam, modo ao vivo)
-   - 🍎 **Continuity Camera** (iPhone, conta alimentos)
-4. Selecione uma e clique no play button verde
-5. Para parar, pressione `q`
-
----
-
-## 🖥️ Opção 3: Terminal (Clássico)
-
-Para quem prefere linha de comando ou usa outro editor.
-
-### Preparação (primeira vez):
-
-```bash
-cd /Users/gabmarussi/Documents/GitHub/Detector-de-Alimentos
-
-# Ativar ambiente virtual
-source .venv/bin/activate
-
-# Entrar na pasta do detector
-cd detector
+```powershell
+.\.venv\Scripts\Activate.ps1
+python .\camera\run.py --camera-id 0 --mode conveyor
 ```
 
-### Escolha um comando:
+Com iPhone/segunda camera:
 
-```bash
-# Webcam interna - modo contagem (padrão)
-python run.py --camera-id 0 --mode conveyor
-
-# Webcam interna - modo ao vivo (sem contar)
-python run.py --camera-id 0 --mode live
-
-# iPhone via Continuity Camera - modo contagem
-python run.py --camera-id 1 --mode conveyor
-
-# Customizar confiança detecção (padrão 0.7)
-python run.py --camera-id 0 --mode live --conf 0.5
+```powershell
+python .\camera\run.py --camera-id 1 --mode conveyor
 ```
 
-### Para parar:
+Modo live (sem contagem por linha):
 
-- Pressione `q` no teclado
-- Ou pressione `Ctrl+C` no terminal
-
----
-
-## 📊 Sobre os Modos
-
-| Modo              | Camera ID | Descrição                              |
-| ----------------- | --------- | -------------------------------------- |
-| `--mode conveyor` | 0 ou 1    | Conta objetos que atravessam uma linha |
-| `--mode live`     | 0 ou 1    | Apenas detecta, não conta              |
-| `--camera-id 0`   | -         | Webcam interna do MacBook              |
-| `--camera-id 1`   | -         | iPhone conectado via Continuity        |
-
----
-
-## 🎥 Configurando o iPhone (Continuity)
-
-Para usar o iPhone como câmera:
-
-1. **iPhone e Mac conectados na mesma WiFi**
-2. **Proximity:** iPhone bem perto do Mac
-3. **Continuity ativado** nas configurações de ambos
-4. No comando use `--camera-id 1`
-
-Se não funcionar com camera-id 1, tente:
-
-- `--camera-id 2` ou `--camera-id 3`
-
----
-
-## ❓ Troubleshooting
-
-### Problema: "Erro de câmera"
-
-- Verifique se a webcam não está sendo usada por outro app
-- No macOS: System Preferences → Security & Privacy → Camera
-
-### Problema: "Módulo não encontrado"
-
-- Certifique-se de ativar o ambiente virtual:
-  ```bash
-  source .venv/bin/activate
-  ```
-
-### Problema: "iPhone não aparece"
-
-- Verifique se está em Continuity (System Preferences)
-- Tente camera-id 2 ou 3 em vez de 1
-
----
-
-## 🔧 Argumentos Disponíveis
-
-```bash
-python run.py [OPTIONS]
-
-OPTIONS:
-  --camera-id INT         ID da câmera (0=webcam, 1=iPhone). Default: 0
-  --mode TEXT             Modo: 'conveyor' ou 'live'. Default: conveyor
-  --conf FLOAT            Confiança mínima (0-1). Default: 0.7
-  --line-y FLOAT          Posição da linha de contagem (0-1). Default: 0.6
-  --min-label-votes INT   Votos para confirmar label. Default: 3
+```powershell
+python .\camera\run.py --camera-id 0 --mode live
 ```
 
-Exemplo:
+Forcando um peso especifico:
 
-```bash
-python run.py --camera-id 1 --mode live --conf 0.5 --line-y 0.5
+```powershell
+python .\camera\run.py --model .\detector\runs\train\weights\best.pt --camera-id 0 --mode conveyor
 ```
 
-- Mostra avisos se perder frame
+## Argumentos
 
-### ✅ Script `run.py` Simples
+- --model: caminho do .pt (opcional)
+- --camera-id: id da camera
+- --mode: conveyor ou live
+- --conf: confianca minima
+- --line-y: linha de contagem (0 a 1)
+- --min-label-votes: estabilidade da classe por tracking
 
-- Menu interativo
-- Sem argumentos de linha de comando
-- Apertável com play button do VS Code
+## Resumo de treino sem ler CSV manualmente
 
----
+Na raiz do projeto:
 
-## 🐛 Se Ainda Houver Problemas
+```powershell
+python .\detector\summarize_results.py --csv .\detector\runs\train\results.csv
+```
 
-### Problema: "Tudo ainda é arroz"
+Com outras opcoes:
 
-- ✅ Verificamos o threshold, agora está 0.6
-- Se persistir, é possível que o modelo tenha super-ajuste
-- Solução: Fazer novo treinamento com data augmentation balanceada
+```powershell
+# Ordenar pelas melhores epocas de mAP50-95
+python .\detector\summarize_results.py --metric "metrics/mAP50-95(B)"
 
-### Problema: "iPhone para rapidamente"
+# Mostrar top 10 epocas
+python .\detector\summarize_results.py --top-k 10
+```
 
-- ✅ Corrigimos com `BUFFERSIZE=1` e `FPS=30`
-- Se ainda assim parar, verifique:
-  1. iPhone está conectado como Continuity Camera?
-  2. Está em proximity do Mac?
-  3. Tente usar camera-id 2 ou 3
+## Troubleshooting rapido
 
-### Problema: "Não consigo saber como rodar"
-
-- ✅ Agora é só apertar play button em `run.py`
-- VS Code mostra menu interativo no terminal
-
----
-
-## 📱 Testar Agora
-
-Abra o VS Code, vá em `detector/run.py` e aperte o play button! 🎮
+- Erro de camera:
+  - Feche apps que estejam usando a webcam.
+  - Teste camera-id 0, 1, 2.
+- Modulo nao encontrado:
+  - Ative .venv antes de executar.
+- Modelo nao encontrado:
+  - Verifique se existe detector/runs/train/weights/best.pt.

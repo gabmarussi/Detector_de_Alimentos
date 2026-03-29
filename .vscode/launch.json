@@ -2,14 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "🎬 Detector - Modo Conveyor",
+      "name": "🎬 Detector - RUN.PY",
       "type": "python",
       "request": "launch",
-      "program": "${workspaceFolder}/detector/run.py",
-      "args": ["--camera-id", "0", "--mode", "conveyor"],
+      "program": "${workspaceFolder}/camera/run.py",
       "console": "integratedTerminal",
       "justMyCode": false,
-      "cwd": "${workspaceFolder}/detector",
+      "cwd": "${workspaceFolder}/camera",
       "env": {
         "PYTHONUNBUFFERED": "1"
       }
@@ -18,10 +17,17 @@
       "name": "📱 Webcam MacBook",
       "type": "python",
       "request": "launch",
-      "program": "${workspaceFolder}/detector/run.py",
-      "args": ["--camera-id", "0", "--mode", "live"],
+      "program": "${workspaceFolder}/camera/detector.py",
+      "args": [
+        "--model",
+        "../detector/runs/train/weights/best.pt",
+        "--source",
+        "webcam",
+        "--camera-id",
+        "0"
+      ],
       "console": "integratedTerminal",
-      "cwd": "${workspaceFolder}/detector",
+      "cwd": "${workspaceFolder}/camera",
       "env": {
         "PYTHONUNBUFFERED": "1"
       }
@@ -30,10 +36,29 @@
       "name": "🍎 Continuity Camera (iPhone)",
       "type": "python",
       "request": "launch",
-      "program": "${workspaceFolder}/detector/run.py",
-      "args": ["--camera-id", "1", "--mode", "conveyor"],
+      "program": "${workspaceFolder}/camera/detector.py",
+      "args": [
+        "--model",
+        "../detector/runs/train/weights/best.pt",
+        "--source",
+        "webcam",
+        "--camera-id",
+        "1"
+      ],
       "console": "integratedTerminal",
-      "cwd": "${workspaceFolder}/detector",
+      "cwd": "${workspaceFolder}/camera",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "🧪 Teste Modelo Atual (RUN.PY)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/camera/run.py",
+      "args": ["--camera-id", "0", "--mode", "conveyor"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/camera",
       "env": {
         "PYTHONUNBUFFERED": "1"
       }
