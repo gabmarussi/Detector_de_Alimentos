@@ -51,6 +51,20 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 
+# YOLO training outputs and model weights
+detector/runs/
+*.pt
+!yolo11n.pt
+!detector/runs/train/weights/best.pt
+
+# Generated outputs
+*.log
+*.csv
+output/
+results/
+pip-log.txt
+pip-delete-this-directory.txt
+
 # Unit test / coverage reports
 htmlcov/
 .tox/

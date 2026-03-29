@@ -45,14 +45,16 @@ Forcando um peso especifico:
 python .\camera\run.py --model .\detector\runs\train\weights\best.pt --camera-id 0 --mode conveyor
 ```
 
-## Argumentos
+## Argumentos (camera/run.py)
 
-- --model: caminho do .pt (opcional)
-- --camera-id: id da camera
-- --mode: conveyor ou live
-- --conf: confianca minima
-- --line-y: linha de contagem (0 a 1)
-- --min-label-votes: estabilidade da classe por tracking
+| Argumento           | Descrição                           | Padrão   |
+| ------------------- | ----------------------------------- | -------- |
+| `--model`           | Caminho para modelo .pt customizado | Auto     |
+| `--camera-id`       | ID da câmera (0, 1, 2, ...)         | 0        |
+| `--mode`            | Modo (conveyor/live)                | conveyor |
+| `--conf`            | Confiança mínima (0.0-1.0)          | 0.7      |
+| `--line-y`          | Posição da linha (0.0-1.0)          | 0.6      |
+| `--min-label-votes` | Frames para estabilizar detecção    | 3        |
 
 ## Resumo de treino sem ler CSV manualmente
 

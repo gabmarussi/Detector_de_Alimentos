@@ -42,85 +42,123 @@ Sistema de detecção em tempo real para identificação de produtos alimentíci
 
 ### Execução Rápida
 
-**Modo Conveyor (recomendado):**
+**Menu Principal (recomendado):**
 
 ```powershell
-python camera\run.py --camera-id 0 --mode conveyor
+python main.py
 ```
 
-**Modo Live:**
+Abre um menu interativo com as opções:
+
+```
+0️⃣  📹 Camera (detecção em tempo real)
+1️⃣  📷 Foto (captura via webcam)
+2️⃣  🖼️  Arquivo Salvo (imagem do disco)
+q️  ❌ Sair
+```
+
+O script guiará você através de:
+
+- Detecção em **modo Conveyor** (com contagem na esteira) ou **Live** (simples)
+- Seleção da câmera disponível
+- Análise de imagens salvas em disco
+
+### Script de Teste Rápido
+
+Para testes rápidos com argumentos de linha de comando:
 
 ```powershell
-python camera\run.py --camera-id 0 --mode live
+# Teste padrão (modo conveyor)
+python camera\run.py
+
+# Modo live com câmera específica
+python camera\run.py --mode live --camera-id 1
+
+# Modificar confiança
+python camera\run.py --conf 0.5
+
+# Ver todos os argumentos
+python camera\run.py --help
 ```
 
-**Controles:**
+**Argumentos disponíveis para `camera/run.py`:**
 
-- Pressione `q` para sair
-
-## 📋 Argumentos de Linha de Comando
-
-| Argumento           | Descrição                                | Padrão                  |
-| ------------------- | ---------------------------------------- | ----------------------- |
-| `--model`           | Caminho para o modelo .pt                | Detecta automaticamente |
-| `--camera-id`       | ID da câmera (0, 1, 2...)                | 0                       |
-| `--mode`            | Modo de operação (conveyor/live)         | conveyor                |
-| `--conf`            | Confiança mínima (0.0 a 1.0)             | 0.7                     |
-| `--line-y`          | Posição da linha de contagem (0.0 a 1.0) | 0.6                     |
-| `--min-label-votes` | Frames mínimos para estabilizar classe   | 3                       |
+| Argumento           | Descrição                           | Padrão   |
+| ------------------- | ----------------------------------- | -------- |
+| `--model`           | Caminho para modelo .pt customizado | Auto     |
+| `--camera-id`       | ID da câmera (0, 1, 2, ...)         | 0        |
+| `--mode`            | Modo (conveyor/live)                | conveyor |
+| `--conf`            | Confiança mínima (0.0-1.0)          | 0.7      |
+| `--line-y`          | Posição da linha (0.0-1.0)          | 0.6      |
+| `--min-label-votes` | Frames para estabilizar detecção    | 3        |
 
 ## 📁 Estrutura do Projeto
 
 ```text
 Detector de Alimentos/
-├── camera/                     # Aplicação de inferência
-│   ├── detector.py            # Classe FoodDetector
-│   ├── run.py                 # Script principal de execução
+├── main.py                    # 🍽️  Menu interativo principal
+│
+├── camera/                    # Aplicação de inferência
+│   ├── detector.py           # Classe FoodDetector
+│   ├── run.py                # Script de teste rápido (com argumentos)
 │   ├── requirements.txt       # Dependências do projeto
 │   └── yolo11n.pt            # Modelo base YOLO11 nano
 │
-├── detector/                   # Dataset e modelo treinado (v7)
-│   ├── data.yaml              # Configuração do dataset
-│   ├── train/                 # 551 imagens de treino
-│   ├── valid/                 # 161 imagens de validação
-│   ├── test/                  # 80 imagens de teste
-│   ├── runs/train/            # Resultados do treino
-│   │   ├── results.csv        # Métricas por época
+├── detector/                  # Dataset e modelo treinado
+│   ├── data.yaml             # Configuração do dataset (paths atualizados)
+│   ├── data/                 # **NOVO** - Dados organizados (código separado de dados)
+│   │   ├── train/            # 551 imagens de treino
+│   │   │   └── images/, labels/
+│   │   ├── valid/            # 161 imagens de validação
+│   │   │   └── images/, labels/
+│   │   └── test/             # 80 imagens de teste
+│   │       └── images/, labels/
+│   ├── runs/train/           # Resultados do treino
+│   │   ├── results.csv       # Métricas por época
 │   │   └── weights/
-│   │       ├── best.pt        # Melhor modelo (usado por padrão)
-│   │       └── last.pt        # Último checkpoint
-│   └── summarize_results.py   # Análise de métricas
+│   │       ├── best.pt       # Melhor modelo (usado por padrão)
+│   │       └── last.pt       # Último checkpoint
+│   └── summarize_results.py  # Análise de métricas
 │
-├── common/                     # Código compartilhado
-│   ├── constants.py           # Constantes e configurações
-│   └── model_utils.py         # Utilitários de modelo
+├── common/                    # Código compartilhado
+│   ├── constants.py          # Constantes e configurações
+│   └── model_utils.py        # Utilitários de modelo
 │
-├── docs/                       # Documentação completa
-│   ├── API.md                 # Documentação da API
-│   ├── ARQUITETURA.md         # Arquitetura do sistema
-│   ├── COMO_RODAR.md          # Guia de execução detalhado
-│   ├── DESENVOLVIMENTO.md     # Guia de desenvolvimento
-│   ├── ESTRUTURA_PROJETO.md   # Estrutura detalhada
-│   └── HISTORICO.md           # Histórico do projeto
+├── docs/                      # Documentação completa
+│   ├── COMO_RODAR.md         # Guia de execução detalhado
+│   └── DOCUMENTACAO.md       # Documentação geral
 │
-└── tools/                      # Ferramentas auxiliares
-    └── webscrapping/          # Scripts de coleta de imagens
+└── tools/                     # Ferramentas auxiliares
+    └── webscrapping/         # Scripts de coleta de imagens
 ```
 
-## 📊 Métricas do Modelo Atual (v7)
+**Alterações Estruturais (v2025):**
+
+- ✨ **[main.py](main.py)** - Menu interativo sofisticado para usuários (recomendado)
+- 🔧 **[camera/run.py](camera/run.py)** - Script de teste rápido com argumentos (desenvolvimento)
+- 📦 **`detector/data/`** - Dados organizados separados de código (train/valid/test)
+- 🔒 **`.gitignore`** - Atualizado para ignorar `runs/` e modelos `*.pt`
+
+## 📊 Métricas do Modelo (v8)
 
 **Dataset:**
 
 - Classes: `beans package`, `pasta package`, `rice package`
-- Total: 792 imagens (551 treino / 161 validação / 80 teste)
+- Total: 981 imagens (589 train / 196 valid / 196 test)
+- Negative samples: 191 imagens (reduzem falsos positivos)
 - Fonte: Roboflow
 
-**Performance (época 100):**
+**Performance (Google Colab (200 épocas) - Validation):**
 
-- Precision: 0.7374
-- Recall: 0.4848
-- mAP50: 0.4616
-- mAP50-95: 0.3849
+- Precision: 90.25%
+- Recall: 70.44%
+- mAP50: 71.79%
+
+**Performance (Roboflow - Test Set):**
+
+- Precision: 93.7%
+- Recall: 69.8%
+- mAP50: 76.2%
 
 **Analisar métricas detalhadas:**
 
@@ -146,8 +184,6 @@ print(f"Detectados: {dict(counts)}")
 detector.predict_webcam(camera_id=0, mode="conveyor")
 ```
 
-Veja mais exemplos em [docs/API.md](docs/API.md).
-
 ## 🛠️ Tecnologias
 
 - **[Ultralytics YOLO](https://github.com/ultralytics/ultralytics)** - Framework de detecção
@@ -155,48 +191,7 @@ Veja mais exemplos em [docs/API.md](docs/API.md).
 - **[ByteTrack](https://github.com/ifzhang/ByteTrack)** - Algoritmo de tracking multi-objeto
 - **Python 3.8+** - Linguagem de programação
 
-## 🤝 Contribuindo
+## 📖 Documentação
 
-Contribuições são bem-vindas! Consulte o [Guia de Desenvolvimento](docs/DESENVOLVIMENTO.md) para:
-
-- Configurar ambiente de desenvolvimento
-- Padrões de código e commits
-- Como adicionar novas funcionalidades
-- Debugging e troubleshooting
-
-## ⚠️ Troubleshooting
-
-**Câmera não abre:**
-
-- Feche outros aplicativos usando a webcam
-- Tente diferentes IDs de câmera: `--camera-id 1`, `--camera-id 2`
-- Verifique permissões de câmera no Windows
-
-**Modelo não encontrado:**
-
-- Verifique se `detector/runs/train/weights/best.pt` existe
-- Use `--model` para especificar caminho customizado
-
-**Performance lenta:**
-
-- Reduza a resolução da câmera
-- Aumente o threshold de confiança: `--conf 0.8`
-
-Mais soluções em [docs/DESENVOLVIMENTO.md](docs/DESENVOLVIMENTO.md#debugging).
-
-## 📖 Documentação Completa
-
-### Guias de Usuário
-
-- **[FAQ](docs/FAQ.md)** - Perguntas frequentes e soluções rápidas
 - **[Como Rodar](docs/COMO_RODAR.md)** - Guia completo de execução
-- **[Estrutura do Projeto](docs/ESTRUTURA_PROJETO.md)** - Organização de pastas e arquivos
-- **[Histórico](docs/HISTORICO.md)** - Histórico de versões e mudanças
-
-### Documentação Técnica
-
-- **[API](docs/API.md)** - Documentação da API do FoodDetector
-- **[Arquitetura](docs/ARQUITETURA.md)** - Arquitetura do sistema e fluxo de dados
-- **[Desenvolvimento](docs/DESENVOLVIMENTO.md)** - Guia para contribuidores
-
-**📚 [Índice Completo da Documentação](docs/README.md)**
+- **[Documentação](docs/DOCUMENTACAO.md)** - Organização de pastas e arquivos

@@ -1,6 +1,6 @@
-train: train/images
-val: valid/images
-test: test/images
+train: data/train/images
+val: data/valid/images
+test: data/test/images
 
 nc: 3
 names: ["beans package", "pasta package", "rice package"]
@@ -8,6 +8,6 @@ names: ["beans package", "pasta package", "rice package"]
 roboflow:
   workspace: pessoagenerica666-gmail-com
   project: food-detector-9zgsn-d8m90
-  version: 7
+  version: 8
   license: Public Domain
-  url: https://universe.roboflow.com/pessoagenerica666-gmail-com/food-detector-9zgsn-d8m90/dataset/7
+  url: https://universe.roboflow.com/pessoagenerica666-gmail-com/food-detector-9zgsn-d8m90/dataset/8

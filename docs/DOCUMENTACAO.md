@@ -36,22 +36,24 @@ Detector de Alimentos/
 
 ## Dataset e Modelo
 
-- Framework: Ultralytics YOLO11 nano
-- Dataset: Roboflow v7 (790 imagens)
+- Framework: Ultralytics YOLOv11 nano
+- Dataset: Roboflow v8 (981 imagens)
 - Classes: beans package (283), pasta package (259), rice package (262)
-- Divisao: 25% train (198) / 25% valid (198) / 50% test (394)
+- Negative samples: 191 imagens
+- Divisao: 60% train (589) / 20% valid (196) / 20% test (196)
 
 ## Metricas
 
-Roboflow (Industry Standard off):
-- Precision: 96.6%
-- Recall: 68.8%
-- mAP@50: 75.7%
+Roboflow (Test Set, Industry Standard off):
+- Precision: 93.7%
+- Recall: 69.8%
+- mAP@50: 76.2%
 
-Local (Google Colab, dataset anterior 665 imgs):
-- Precision: 73.74%
-- Recall: 48.49%
-- mAP@50: 46.16%
+Google Colab (Validation Set, epoca 200):
+- Precision: 90.25%
+- Recall: 70.44%
+- mAP@50: 71.79%
+- mAP@50-95: 62.73%
 
 ## Modos de Operacao
 
