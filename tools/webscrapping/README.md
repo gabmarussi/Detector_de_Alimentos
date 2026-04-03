@@ -1,15 +1,15 @@
-# Web Scrapping (Ferramentas Auxiliares)
+# Web Scrapping (Auxiliary Tools)
 
-Estes scripts servem para coletar imagens da internet e aumentar dataset de treino.
+These scripts collect images from the internet to expand the training dataset.
 
-Nao sao necessarios para rodar a deteccao em camera.
+They are not required to run real-time camera detection.
 
-## Arquivos
+## Files
 
 - collect_images.py
 - collect_images_bing.py
 
-## Uso (PowerShell)
+## Usage (PowerShell)
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
@@ -17,9 +17,9 @@ cd .\tools\webscrapping
 python .\collect_images_bing.py
 ```
 
-## Saida esperada
+## Expected Output
 
-As imagens devem ser organizadas em:
+Images should be organized in:
 
 ```text
 detector/
@@ -28,6 +28,6 @@ detector/
 `- test/images/
 ```
 
-## Observacao
+## Note
 
-Para inferencia em tempo real, use camera/run.py.
+For real-time inference, use camera/run.py.

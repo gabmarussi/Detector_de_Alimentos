@@ -1,302 +1,276 @@
-# Perguntas Frequentes (FAQ)
+# Frequently Asked Questions (FAQ)
 
-## Instalação e Configuração
+## Installation and Setup
 
-### Q: Quais são os requisitos mínimos do sistema?
+### Q: What are the minimum system requirements?
 
 **A:**
 
-- Python 3.8 ou superior
-- 4GB RAM (recomendado 8GB)
-- Webcam funcional
-- Windows, Linux ou macOS
-- ~500MB de espaço em disco para dependências
+- Python 3.8+
+- 4GB RAM (8GB recommended)
+- Working webcam
+- Windows, Linux, or macOS
+- ~500MB free disk space for dependencies
 
-### Q: Como instalo as dependências?
+### Q: How do I install dependencies?
 
 **A:**
 
 ```powershell
-# Ativar ambiente virtual
+# Activate virtual environment
 .\.venv\Scripts\Activate.ps1
 
-# Instalar dependências
+# Install dependencies
 pip install -r camera\requirements.txt
 ```
 
-### Q: Posso usar sem ambiente virtual?
+### Q: Can I run without a virtual environment?
 
-**A:** Sim, mas não é recomendado. O ambiente virtual evita conflitos com outras instalações Python.
+**A:** Yes, but it is not recommended. A virtual environment avoids dependency conflicts.
 
-## Execução
+## Running the Project
 
-### Q: Como inicio o detector?
+### Q: How do I start the detector?
 
-**A:** Forma mais simples:
+**A:** The simplest way:
 
 ```powershell
 python camera\run.py --camera-id 0 --mode conveyor
 ```
 
-### Q: Qual é a diferença entre os modos "conveyor" e "live"?
+### Q: What is the difference between conveyor and live modes?
 
 **A:**
 
-- **Live:** Detecção instantânea frame a frame. Mostra contagem atual no frame.
-- **Conveyor:** Simula esteira transportadora. Objetos são contados ao cruzar uma linha horizontal. A contagem é acumulada.
+- **Live:** instant frame-by-frame detection with current frame counts.
+- **Conveyor:** objects are counted when crossing a horizontal line; count is cumulative.
 
-### Q: Como escolho qual câmera usar?
+### Q: How do I choose which camera to use?
 
-**A:** Use `--camera-id` com diferentes números:
+**A:** Use `--camera-id` with different values:
 
 ```powershell
-# Webcam principal
+# Primary webcam
 python camera\run.py --camera-id 0
 
-# Segunda câmera (iPhone via Continuity, webcam externa)
+# Second camera (iPhone Continuity Camera, external webcam)
 python camera\run.py --camera-id 1
 
-# Terceira câmera
+# Third camera
 python camera\run.py --camera-id 2
 ```
 
-### Q: Como ajusto a sensibilidade da detecção?
+### Q: How do I adjust detection sensitivity?
 
-**A:** Use `--conf` para ajustar o threshold de confiança (0.0 a 1.0):
+**A:** Use `--conf` (0.0 to 1.0):
 
 ```powershell
-# Mais sensível (mais detecções, mas pode ter falsos positivos)
+# More sensitive (more detections, possible false positives)
 python camera\run.py --conf 0.5
 
-# Menos sensível (menos detecções, mais confiáveis)
+# Less sensitive (fewer detections, usually more reliable)
 python camera\run.py --conf 0.8
 
-# Padrão (balanceado)
+# Default (balanced)
 python camera\run.py --conf 0.7
 ```
 
-### Q: Posso ajustar a posição da linha de contagem no modo conveyor?
+### Q: Can I change the counting line position in conveyor mode?
 
-**A:** Sim, use `--line-y` com valor entre 0.0 (topo) e 1.0 (fundo):
+**A:** Yes, use `--line-y` between 0.0 (top) and 1.0 (bottom):
 
 ```powershell
-# Linha no meio da tela
+# Line in the center
 python camera\run.py --mode conveyor --line-y 0.5
 
-# Linha mais embaixo (padrão)
+# Line lower on the frame (default)
 python camera\run.py --mode conveyor --line-y 0.6
 ```
 
-## Problemas Comuns
+## Common Problems
 
-### Q: "Nao foi possivel abrir camera X"
+### Q: "Could not open camera X"
 
-**A:** Possíveis soluções:
+**A:** Try these steps:
 
-1. Feche outros apps usando a webcam (Teams, Zoom, Skype)
-2. Tente outro camera-id: `--camera-id 1` ou `--camera-id 2`
-3. Verifique permissões de câmera no Windows (Configurações > Privacidade > Câmera)
-4. Reinicie o computador
+1. Close apps that are using the webcam (Teams, Zoom, etc.)
+2. Try another camera ID: `--camera-id 1` or `--camera-id 2`
+3. Check OS camera permissions
+4. Restart your computer
 
-### Q: "Modelo treinado nao encontrado"
+### Q: "Trained model not found"
 
-**A:** Verifique se existe `detector/runs/train/weights/best.pt`. Se não:
+**A:** Check whether `detector/runs/train/weights/best.pt` exists. If not:
 
-1. Certifique-se de estar na raiz do projeto
-2. Ou especifique o caminho manualmente: `--model caminho\para\modelo.pt`
+1. Ensure you are in the project root
+2. Provide model path manually with `--model`
 
-### Q: "Modulo nao encontrado" ou "ImportError"
+### Q: "Module not found" or "ImportError"
 
 **A:**
 
-1. Ative o ambiente virtual: `.\.venv\Scripts\Activate.ps1`
-2. Reinstale as dependências: `pip install -r camera\requirements.txt`
-3. Verifique se está usando Python 3.8+: `python --version`
+1. Activate environment: `.\.venv\Scripts\Activate.ps1`
+2. Reinstall dependencies: `pip install -r camera\requirements.txt`
+3. Verify Python version: `python --version`
 
-### Q: A detecção está muito lenta (< 10 FPS)
+### Q: Detection is too slow (< 10 FPS)
 
-**A:** Otimizações possíveis:
+**A:** Possible optimizations:
 
-1. Feche outros programas pesados
-2. Use modelo mais leve (já estamos usando nano)
-3. Reduza a resolução no código (editar `DEFAULT_CAMERA_WIDTH` em `common/constants.py`)
-4. Aumente o threshold: `--conf 0.8`
+1. Close heavy background applications
+2. Keep using a lightweight model (nano)
+3. Reduce camera resolution in `common/constants.py`
+4. Increase confidence threshold: `--conf 0.8`
 
-### Q: Objetos estão sendo contados múltiplas vezes
+### Q: Objects are counted multiple times
 
-**A:** No modo conveyor, isso pode acontecer se:
+**A:** In conveyor mode, this can happen when:
 
-1. Objeto cruza a linha múltiplas vezes (solução: posicionar melhor a câmera)
-2. Tracking perdendo IDs (solução: aumentar `--min-label-votes 5`)
+1. The object crosses the line multiple times
+2. Tracking loses IDs (increase `--min-label-votes 5`)
 
-### Q: Detecções estão "piscando" entre classes
+### Q: Detections "flicker" between classes
 
-**A:** Use `--min-label-votes` maior:
+**A:** Increase label vote stabilization:
 
 ```powershell
 python camera\run.py --min-label-votes 5
 ```
 
-Isso exige 5 frames consecutivos com a mesma classe antes de estabilizar.
+This requires 5 consistent frames before confirming a label.
 
-## Uso Avançado
+## Advanced Usage
 
-### Q: Como uso o detector em meu próprio script Python?
+### Q: How do I use the detector in my own Python script?
 
-**A:** Exemplo básico:
+**A:** Basic example:
 
 ```python
 from camera.detector import FoodDetector
 
 detector = FoodDetector("detector/runs/train/weights/best.pt", conf=0.7)
 
-# Imagem estática
-counts = detector.predict_image("minha_foto.jpg")
+# Static image
+counts = detector.predict_image("my_photo.jpg")
 print(counts)
 
-# Webcam em tempo real
+# Real-time webcam
 detector.predict_webcam(camera_id=0, mode="live")
 ```
 
-Veja [docs/API.md](API.md) para documentação completa.
+See [DEVELOPMENT.md](DEVELOPMENT.md) and [ARCHITECTURE.md](ARCHITECTURE.md) for implementation details.
 
-### Q: Posso salvar as detecções em arquivo?
+### Q: Can I save detections to a file?
 
-**A:** Sim, modifique o código ou capture o output:
+**A:** Yes:
 
 ```python
 from camera.detector import FoodDetector
 
 detector = FoodDetector("detector/runs/train/weights/best.pt")
-counts = detector.predict_image("imagem.jpg")
+counts = detector.predict_image("image.jpg")
 
-# Salvar em arquivo
-with open("resultados.txt", "w") as f:
+with open("results.txt", "w") as f:
     f.write(str(dict(counts)))
 ```
 
-### Q: Como treino um novo modelo com mais dados?
+### Q: How do I train a new model with more data?
 
 **A:**
 
-1. Colete e anote novas imagens usando Roboflow
-2. Exporte no formato YOLO
-3. Atualize `detector/data.yaml` com novos caminhos
-4. Use Ultralytics CLI para treinar:
-   ```powershell
-   yolo detect train data=detector/data.yaml model=yolo11n.pt epochs=100
-   ```
-5. Novos pesos estarão em `runs/detect/train/weights/best.pt`
+1. Collect and annotate new images (Roboflow)
+2. Export in YOLO format
+3. Update `detector/data.yaml`
+4. Train with Ultralytics CLI:
 
-### Q: Posso adicionar novas classes de alimentos?
+```powershell
+yolo detect train data=detector/data.yaml model=yolo11n.pt epochs=100
+```
 
-**A:** Sim! Veja [docs/DESENVOLVIMENTO.md](DESENVOLVIMENTO.md#adicionar-nova-classe-de-alimento) para guia completo. Resumo:
+5. New weights will be generated under training output folders
 
-1. Retreinar modelo com nova classe
-2. Atualizar `DISPLAY_NAMES` e `CLASS_COLORS` em `common/constants.py`
-3. Opcionalmente ajustar overlays em `camera/detector.py`
+### Q: Can I add new food classes?
 
-### Q: Como integro com banco de dados ou API externa?
+**A:** Yes. See [DEVELOPMENT.md](DEVELOPMENT.md#1-add-a-new-food-class) for the full guide.
 
-**A:** Use o FoodDetector programaticamente:
+### Q: How do I integrate with an external API or database?
+
+**A:** Use FoodDetector programmatically:
 
 ```python
 from camera.detector import FoodDetector
 import requests
 
-detector = FoodDetector("modelo.pt")
-counts = detector.predict_image("foto.jpg")
+detector = FoodDetector("model.pt")
+counts = detector.predict_image("photo.jpg")
 
-# Enviar para API
-requests.post("https://minha-api.com/detections", json=dict(counts))
-
-# Ou salvar em banco
-# db.save_detection(counts)
+requests.post("https://my-api.com/detections", json=dict(counts))
 ```
 
-## Desempenho
+## Performance
 
-### Q: Quantos FPS consigo?
+### Q: How many FPS can I get?
 
-**A:** Depende do hardware:
+**A:** Depends on hardware:
 
-- **GPU:** 30-60 FPS (ideal)
-- **CPU moderno (i5/i7):** 15-30 FPS (bom)
-- **CPU antigo:** 5-15 FPS (usável)
+- **GPU:** 30-60 FPS
+- **Modern CPU (i5/i7):** 15-30 FPS
+- **Older CPU:** 5-15 FPS
 
-### Q: Posso usar GPU para acelerar?
+### Q: Can I use GPU acceleration?
 
-**A:** Sim, se tiver CUDA instalado. O PyTorch detecta automaticamente.
+**A:** Yes, if CUDA is available. PyTorch will detect it automatically.
 
 ```powershell
-# Verificar se GPU está disponível
 python -c "import torch; print(torch.cuda.is_available())"
 ```
 
-### Q: Qual o consumo de memória?
+### Q: What is memory usage like?
 
-**A:** Aproximadamente:
+**A:** Approximate values:
 
-- Modelo carregado: ~50MB
-- Webcam ativa: ~200MB
+- Loaded model: ~50MB
+- Active webcam pipeline: ~200MB
 - Total: ~300-400MB RAM
 
-## Desenvolvimento
+## Development
 
-### Q: Como contribuo com o projeto?
+### Q: How can I contribute?
 
-**A:** Veja [docs/DESENVOLVIMENTO.md](DESENVOLVIMENTO.md) para:
+**A:** See [DEVELOPMENT.md](DEVELOPMENT.md) for environment setup, standards, and PR flow.
 
-- Setup de ambiente de desenvolvimento
-- Padrões de código
-- Como fazer pull requests
+### Q: Can I use this code commercially?
 
-### Q: Posso usar este código comercialmente?
+**A:** Check the project license in [LICENSE](../LICENSE).
 
-**A:** Depende da licença do projeto. Consulte o arquivo LICENSE na raiz.
+### Q: Where do I report bugs or suggest features?
 
-### Q: Onde reporto bugs ou sugiro features?
+**A:** Open a GitHub issue with:
 
-**A:** Abra uma issue no repositório GitHub com:
+- Clear problem/feature description
+- Steps to reproduce (for bugs)
+- Python version and OS
+- Error logs (if available)
 
-- Descrição clara do problema/sugestão
-- Passos para reproduzir (se bug)
-- Versão do Python e sistema operacional
-- Logs de erro (se aplicável)
+## Model and Dataset
 
-## Modelos e Dataset
+### Q: Which YOLO model is used?
 
-### Q: Qual modelo YOLO está sendo usado?
+**A:** YOLO11 nano (`yolo11n`) as baseline, trained on a custom food dataset.
 
-**A:** YOLO11 nano (yolo11n) como base, treinado com dataset customizado de alimentos.
+### Q: Which classes are detected?
 
-### Q: Quais classes o modelo detecta?
+**A:**
 
-**A:** Atualmente:
+- Beans (`beans package`)
+- Pasta (`pasta package`)
+- Rice (`rice package`)
 
-- `Feijao` (beans package)
-- `Macarrao` (pasta package)
-- `Arroz` (rice package)
+### Q: How many images are in the dataset?
 
-### Q: Quantas imagens tem o dataset?
+**A:** Current dataset in this repository has 981 images in total according to Roboflow export metadata.
 
-**A:** Dataset v7:
-
-- Treino: 551 imagens
-- Validação: 161 imagens
-- Teste: 80 imagens
-- **Total: 792 imagens**
-
-### Q: Qual a acurácia do modelo?
-
-**A:** Métricas da época 100:
-
-- Precision: 73.74%
-- Recall: 48.48%
-- mAP50: 46.16%
-- mAP50-95: 38.49%
-
-### Q: Como vejo métricas detalhadas do treino?
+### Q: How do I check detailed training metrics?
 
 **A:**
 
@@ -304,34 +278,33 @@ python -c "import torch; print(torch.cuda.is_available())"
 python detector\summarize_results.py --csv detector\runs\train\results.csv
 ```
 
-## Outros
+## Other Questions
 
-### Q: O projeto funciona em tempo real mesmo?
+### Q: Is it truly real-time?
 
-**A:** Sim! Com hardware adequado (CPU i5+ ou GPU), você consegue 15-60 FPS, o que é em tempo real.
+**A:** Yes, with suitable hardware you can achieve real-time performance.
 
-### Q: Posso usar com vídeos gravados em vez de webcam?
+### Q: Can I use recorded videos instead of webcam?
 
-**A:** Sim, modifique o código para usar arquivo em vez de câmera:
+**A:** Yes. Replace camera input with a video file in OpenCV:
 
 ```python
-# Em vez de cv2.VideoCapture(camera_id)
-cap = cv2.VideoCapture("caminho/para/video.mp4")
+cap = cv2.VideoCapture("path/to/video.mp4")
 ```
 
-### Q: Funciona em Raspberry Pi?
+### Q: Does it run on Raspberry Pi?
 
-**A:** Sim, mas o desempenho será limitado (5-10 FPS). Considere usar modelo ainda menor ou resolução reduzida.
+**A:** Yes, but with limited performance. Consider lower resolution and model optimization.
 
-### Q: Preciso de internet para rodar?
+### Q: Do I need internet access to run it?
 
-**A:** Não, após instalar as dependências. O modelo roda localmente.
+**A:** No, not after dependencies and model files are already installed locally.
 
-### Q: Quanto tempo leva para treinar um novo modelo?
+### Q: How long does training take?
 
-**A:** Depende:
+**A:** Depends on hardware:
 
-- **GPU (NVIDIA):** ~1-2 horas para 100 épocas
-- **CPU:** Várias horas a dias (não recomendado)
+- **NVIDIA GPU:** around 1-2 hours for 100 epochs
+- **CPU only:** many hours to days
 
-Recomendamos usar Google Colab (grátis) ou Kaggle para treino com GPU.
+GPU platforms like Google Colab or Kaggle are recommended for training.

@@ -1,188 +1,162 @@
-# Índice da Documentação
+# Documentation Index
 
-Este diretório contém toda a documentação do projeto Detector de Alimentos.
+This directory contains the project documentation for Food Detector.
 
-## 📚 Guias para Usuários
+## 📚 User Guides
 
-### [FAQ.md](FAQ.md) - Perguntas Frequentes
+### [FAQ.md](FAQ.md) - Frequently Asked Questions
 
-Respostas rápidas para dúvidas comuns:
+Quick answers for common questions:
 
-- Instalação e configuração
-- Problemas comuns e soluções
-- Uso básico e avançado
-- Performance e otimização
-- Informações sobre modelos e dataset
+- Installation and setup
+- Common problems and solutions
+- Basic and advanced usage
+- Performance and optimization
+- Model and dataset details
 
-**Comece aqui se:** Você tem uma dúvida específica ou encontrou um problema.
+**Start here if:** you have a specific question or hit an issue.
 
-### [COMO_RODAR.md](COMO_RODAR.md) - Guia de Execução
+### [HOW_TO_RUN.md](HOW_TO_RUN.md) - Run Guide
 
-Instruções detalhadas para executar o detector:
+Detailed instructions to run the detector:
 
-- Execução via VS Code (debug)
-- Execução via terminal/PowerShell
-- Diferentes modos de operação
-- Argumentos e configurações
-- Troubleshooting básico
+- Running with VS Code (debug)
+- Running in terminal/PowerShell
+- Different operating modes
+- Arguments and configuration
+- Basic troubleshooting
 
-**Comece aqui se:** É sua primeira vez usando o projeto.
+**Start here if:** this is your first time using the project.
 
-### [ESTRUTURA_PROJETO.md](ESTRUTURA_PROJETO.md) - Estrutura de Diretórios
 
-Mapa completo da organização do projeto:
+### [DOCUMENTATION.md](DOCUMENTATION.md) - Project Documentation
 
-- O que cada pasta contém
-- Arquivos importantes
-- O que roda no dia a dia
-- O que mudou recentemente
-- Pastas que podem/não podem ser removidas
+High-level project reference:
 
-**Comece aqui se:** Quer entender a organização do código.
+- Folder structure
+- Main components
+- Dataset and model summary
+- Key metrics and run commands
 
-### [HISTORICO.md](HISTORICO.md) - Histórico do Projeto
+**Start here if:** you want a fast technical overview of the repository.
 
-Registro do estado atual e evolução:
+## 🔧 Technical Guides
 
-- Versão de dataset em uso (v7)
-- Métricas do modelo atual
-- Resumo técnico
-- Observações importantes
+### [ARCHITECTURE.md](ARCHITECTURE.md) - System Architecture
 
-**Comece aqui se:** Quer saber sobre versões anteriores ou métricas.
+Technical design and implementation:
 
-## 🔧 Guias Técnicos
+- Component overview
+- Data flow (diagrams)
+- Technologies used
+- Performance optimizations
+- Extensibility guide
 
-### [API.md](API.md) - Documentação da API
+**Start here if:** you want to understand how the system works internally.
 
-Referência completa da API do FoodDetector:
+### [DEVELOPMENT.md](DEVELOPMENT.md) - Development Guide
 
-- Classe FoodDetector e métodos
-- Uso programático
-- Exemplos de código
-- Funções utilitárias
-- Constantes e configurações
+Contributor manual:
 
-**Comece aqui se:** Vai usar o detector em seus próprios scripts Python.
+- Development environment setup
+- Commit structure and code standards
+- Testing changes
+- Adding new features
+- Debugging and performance
+- Contribution workflow
 
-### [ARQUITETURA.md](ARQUITETURA.md) - Arquitetura do Sistema
+**Start here if:** you plan to modify or contribute to the code.
 
-Design e implementação técnica:
+## 🗺️ Navigation Map
 
-- Visão geral dos componentes
-- Fluxo de dados (diagramas)
-- Tecnologias utilizadas
-- Otimizações de performance
-- Guia de extensibilidade
+### Scenario: First Time in the Project
 
-**Comece aqui se:** Quer entender como o sistema funciona internamente.
+1. [README.md](../README.md) - overview and quick start
+2. [HOW_TO_RUN.md](HOW_TO_RUN.md) - how to run
+3. [FAQ.md](FAQ.md) - if you have questions
 
-### [DESENVOLVIMENTO.md](DESENVOLVIMENTO.md) - Guia de Desenvolvimento
+### Scenario: I Want to Use the Detector in My Code
 
-Manual para contribuidores:
+1. [DOCUMENTATION.md](DOCUMENTATION.md) - project and component overview
+2. [FAQ.md](FAQ.md#advanced-usage) - advanced examples
+3. [ARCHITECTURE.md](ARCHITECTURE.md) - architecture overview
 
-- Setup do ambiente de desenvolvimento
-- Estrutura de commits e padrões de código
-- Testando mudanças
-- Adicionando novas funcionalidades
-- Debugging e performance
-- Processo de contribuição
+### Scenario: I Want to Contribute
 
-**Comece aqui se:** Vai modificar ou contribuir com o código.
+1. [DEVELOPMENT.md](DEVELOPMENT.md) - setup and standards
+2. [ARCHITECTURE.md](ARCHITECTURE.md) - structural understanding
+3. [DOCUMENTATION.md](DOCUMENTATION.md) - file organization
 
-## 🗺️ Mapa de Navegação
+### Scenario: I Found a Problem
 
-### Cenário: Primeira Vez no Projeto
+1. [FAQ.md](FAQ.md#common-problems) - quick fixes
+2. [HOW_TO_RUN.md](HOW_TO_RUN.md#quick-troubleshooting) - troubleshooting
+3. [DEVELOPMENT.md](DEVELOPMENT.md#debugging) - advanced debugging
 
-1. [README.md](../README.md) - Visão geral e início rápido
-2. [COMO_RODAR.md](COMO_RODAR.md) - Como executar
-3. [FAQ.md](FAQ.md) - Se tiver dúvidas
+### Scenario: I Want to Add a New Feature
 
-### Cenário: Quero Usar o Detector em Meu Código
+1. [DEVELOPMENT.md](DEVELOPMENT.md#adding-new-features) - step-by-step guides
+2. [ARCHITECTURE.md](ARCHITECTURE.md#extensibility) - extension points
+3. [DOCUMENTATION.md](DOCUMENTATION.md) - existing structure
 
-1. [API.md](API.md) - Documentação da API
-2. [FAQ.md](FAQ.md#uso-avançado) - Exemplos avançados
-3. [ARQUITETURA.md](ARQUITETURA.md) - Entender a arquitetura
+## 📊 Documentation Stats
 
-### Cenário: Vou Contribuir com o Projeto
+| File             | Description                |
+| ---------------- | -------------------------- |
+| FAQ.md           | Frequently asked questions |
+| HOW_TO_RUN.md    | Run guide                  |
+| DOCUMENTATION.md | Project overview           |
+| ARCHITECTURE.md  | Technical architecture     |
+| DEVELOPMENT.md   | Development guide          |
 
-1. [DESENVOLVIMENTO.md](DESENVOLVIMENTO.md) - Setup e padrões
-2. [ARQUITETURA.md](ARQUITETURA.md) - Entender a estrutura
-3. [ESTRUTURA_PROJETO.md](ESTRUTURA_PROJETO.md) - Organização dos arquivos
+## 🔄 Recent Updates
 
-### Cenário: Encontrei um Problema
+**Date:** March 29, 2026
 
-1. [FAQ.md](FAQ.md#problemas-comuns) - Soluções rápidas
-2. [COMO_RODAR.md](COMO_RODAR.md#troubleshooting-rapido) - Troubleshooting
-3. [DESENVOLVIMENTO.md](DESENVOLVIMENTO.md#debugging) - Debug avançado
+**Changes:**
 
-### Cenário: Quero Adicionar Nova Funcionalidade
+- ✅ Complete project documentation created
+- ✅ References to older model versions cleaned up in docs/code
+- ✅ Main README updated with full project overview
+- ✅ Guides added for users and developers
+- ✅ FAQ expanded with 30+ answered questions
+- ✅ Architecture documented with flow diagrams
+- ✅ Development guide created with practical examples
 
-1. [DESENVOLVIMENTO.md](DESENVOLVIMENTO.md#adicionando-novas-funcionalidades) - Guias passo a passo
-2. [ARQUITETURA.md](ARQUITETURA.md#extensibilidade) - Pontos de extensão
-3. [API.md](API.md) - Interface existente
+## 📝 Conventions Used
 
-## 📊 Estatísticas da Documentação
+- **Code blocks:** commands and sample code
+- **Bold:** important terms and emphasis
+- **Italics:** file names and paths
+- **Emojis:** visual section markers
+- **Tables:** quick references
+- **Lists:** steps and options
 
-| Arquivo              | Descrição               | Páginas Aprox.  |
-| -------------------- | ----------------------- | --------------- |
-| FAQ.md               | Perguntas frequentes    | 10              |
-| COMO_RODAR.md        | Guia de execução        | 3               |
-| ESTRUTURA_PROJETO.md | Estrutura do projeto    | 2               |
-| HISTORICO.md         | Histórico               | 1               |
-| API.md               | Documentação API        | 6               |
-| ARQUITETURA.md       | Arquitetura técnica     | 8               |
-| DESENVOLVIMENTO.md   | Guia de desenvolvimento | 10              |
-| **TOTAL**            |                         | **~40 páginas** |
+## ✨ Future Improvements
 
-## 🔄 Atualizações Recentes
+Planned documentation for future versions:
 
-**Data:** 29 de março de 2026
+- [ ] Production deployment guide
+- [ ] Video tutorials
+- [ ] Integration examples
+- [ ] Detailed performance benchmark
+- [ ] Advanced troubleshooting guide with logs
 
-**Mudanças:**
+## 🤝 Contributing to Docs
 
-- ✅ Criada documentação completa do projeto
-- ✅ Removidas referências a modelos v6 e v8 (código e docs)
-- ✅ Atualizado README principal com overview completo
-- ✅ Criados guias para usuários e desenvolvedores
-- ✅ Adicionado FAQ com 30+ perguntas respondidas
-- ✅ Documentada arquitetura com fluxogramas
-- ✅ Guia de desenvolvimento com exemplos práticos
+Found something unclear or missing? Contributions are welcome.
 
-## 📝 Convenções Usadas
+1. Identify the gap or issue
+2. Open an issue or PR
+3. Or edit directly and submit a PR
 
-- **Código em bloco:** Comandos e código de exemplo
-- **Negrito:** Termos importantes e ênfase
-- **Itálico:** Nomes de arquivos e caminhos
-- **Emojis:** Indicadores visuais de seções
-- **Tabelas:** Referências rápidas
-- **Listas:** Passos e opções
+Please keep:
 
-## ✨ Melhorias Futuras
-
-Documentação planejada para futuras versões:
-
-- [ ] Guia de deploy em produção
-- [ ] Tutoriais em vídeo
-- [ ] Exemplos de integração com sistemas
-- [ ] Benchmark detalhado de performance
-- [ ] Guia de troubleshooting avançado com logs
-
-## 🤝 Contribuindo com a Documentação
-
-Encontrou algo confuso ou faltando? Contribuições são bem-vindas!
-
-1. Identifique o gap ou problema
-2. Abra uma issue ou PR
-3. Ou edite diretamente e envie PR
-
-Mantenha:
-
-- Linguagem clara e objetiva
-- Exemplos práticos quando possível
-- Formatação consistente com os outros docs
-- Links para documentação relacionada
+- Clear and objective language
+- Practical examples whenever possible
+- Formatting consistent with other docs
+- Links to related documentation
 
 ---
 
-**Nota:** Esta documentação é mantida atualizada com o código. Se algo não funciona como descrito, por favor reporte.
+**Note:** This documentation is maintained alongside the code. If something does not work as described, please report it.
